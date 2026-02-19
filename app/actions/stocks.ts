@@ -280,7 +280,7 @@ export async function getBatchQuotes(stocks: Array<{ symbol: string; exchange: s
     const provider = getMarketDataProvider();
     const quotes = await provider.getBatchQuotes(stocks);
     const serialized: Record<string, any> = {};
-    for (const [key, quote] of quotes.entries()) {
+    for (const [key, quote] of Array.from(quotes.entries())) {
       serialized[key] = serializeQuote(quote);
     }
     return { success: true, quotes: serialized };
